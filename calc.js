@@ -10,11 +10,12 @@ const back = document.querySelector('.back'); //back button
 let topText = document.querySelector('.topText'); //top text variable
 let bottomText = document.querySelector('.bottomText'); //bottom text variable
 const operators = document.querySelectorAll('.operator'); //operator buttons array
+const equalbtn = document.querySelector('.equal');
 
 
 numbers.forEach(number => {
     number.addEventListener('click', () => {
-        if (number.getAttribute('data-num') == 0 && aNum==0) {
+        if (number.getAttribute('data-num') == 0 && aNum==0) { //to not repeat 0 when its already 0
             aNum="0";
         }
         else {
@@ -24,6 +25,32 @@ numbers.forEach(number => {
         miniDisplay(aNum); //display on topText
     })
 })
+
+/*
+equalbtn.addEventListener('click', () => {
+    if (aNum.length > 0) {
+        if (pointer>3 && sumArray.length==0) {
+            calculation = operation(mainArray[pointer-4], mainArray[pointer-2], mainArray[pointer-3]);
+            sumArray.push(calculation);
+            largeDisplay(calculation);
+        }
+    
+        else if (sumArray!=0) {
+
+            console.log(mainArray);
+            console.log(pointer);
+            console.log(mainArray[pointer-1]);
+            console.log(mainArray[pointer-4], mainArray[pointer-3], mainArray[pointer-2]);
+
+            calculation = operation(sumArray[sumArray.length-1], mainArray[pointer-2], mainArray[pointer-3]);
+            sumArray.push(calculation);
+            largeDisplay(calculation);
+            console.log('sumarray '+sumArray);
+        }
+    }
+});
+*/
+
 
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
@@ -52,12 +79,14 @@ operators.forEach(operator => {
                 calculation = operation(sumArray[sumArray.length-1], mainArray[pointer-2], mainArray[pointer-3]);
                 sumArray.push(calculation);
                 largeDisplay(calculation);
-                console.log('sumarray '+sumArray)
+                console.log('sumarray '+sumArray);
             }
 
         }
     })
 })
+
+
 
 //back button
 back.addEventListener('click', () => {
