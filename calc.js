@@ -15,9 +15,14 @@ console.log(clear);
 
 numbers.forEach(number => {
     number.addEventListener('click', () => {
-        aNum=aNum + number.getAttribute('data-num')
+        if (number.getAttribute('data-num') == 0 && aNum==0) {
+            aNum="";
+        }
+        else {
+            aNum=aNum + number.getAttribute('data-num') //add to current number string
+        }
         console.log(aNum);
-        miniDisplay(aNum);
+        miniDisplay(aNum); //display on topText
     })
 })
 
@@ -28,6 +33,7 @@ back.addEventListener('click', () => {
 
 })
 
+//clear button
 clear.addEventListener('click', () => {
     mainArray = [];
     pointer = 0;
@@ -35,6 +41,6 @@ clear.addEventListener('click', () => {
     aNum = '';
 })
 
-function miniDisplay(arg) {
-    topText.textContent=arg;
+function miniDisplay(arg) { //function to update top text
+    topText.textContent=arg; //update topText
 }
