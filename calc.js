@@ -17,23 +17,24 @@ numbers.forEach(number => {
     number.addEventListener('click', () => {
         aNum=aNum + number.getAttribute('data-num')
         console.log(aNum);
-        updateDisplay(aNum);
+        miniDisplay(aNum);
     })
 })
 
+//back button
 back.addEventListener('click', () => {
-    aNum = aNum.substring(0, aNum.length - 1);
-    updateDisplay(aNum);
+    aNum = aNum.substring(0, aNum.length - 1); //remove the last digit
+    miniDisplay(aNum); //update top display
 
 })
 
 clear.addEventListener('click', () => {
     mainArray = [];
     pointer = 0;
-    updateDisplay('');
+    miniDisplay('');
     aNum = '';
 })
 
-function updateDisplay(arg) {
+function miniDisplay(arg) {
     topText.textContent=arg;
 }

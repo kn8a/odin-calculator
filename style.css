@@ -56,6 +56,7 @@ body{
     gap: 1vh;
     margin-bottom: 1vh;
     box-shadow: inset 0px 0px 15px 0px black;
+    user-select: none;
 }
 
 .bottomText {
@@ -83,6 +84,7 @@ button {
     font-size: larger;
     filter:drop-shadow(1px 1px 4px rgb(112, 87, 55));
     transition: 0.1s;   
+    user-select: none;
 }
 
 button:hover {
