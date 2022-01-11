@@ -2,6 +2,7 @@ let mainArray = [];
 let sumArray = [];
 let aNum='';
 let tooLarge = false;
+let zeroDiv = false;
 
 const numbers = document.querySelectorAll('.number'); //number buttons array
 const clear = document.querySelector('.clear'); //clear button
@@ -14,7 +15,7 @@ const decPeriod = document.querySelector('.period');
 
 numbers.forEach(number => {
     number.addEventListener('click', () => {
-        if (tooLarge==true) {return false;}
+        if (tooLarge==true || zeroDiv==true) {return false;}
         if (number.getAttribute('data-num') == 0 && aNum==0) { //to not repeat 0 when its already 0
             aNum="0";
         }
@@ -36,6 +37,12 @@ decPeriod.addEventListener('click', () => {
 
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
+        if (operator.getAttribute('data-opr')=='-' && aNum.length==0 && aNum.toString().indexOf('-') == -1) {
+            console.log(aNum);
+            aNum = '-' + aNum;
+            console.log(aNum);
+            return;
+        }
         if (aNum.length==0 && sumArray.length==0) {
             return;} //in case operator clicked without a number and without a previous operation
         if (operator.getAttribute('data-opr')=='=' && aNum.length>0 && mainArray.length==2){
@@ -83,8 +90,13 @@ operators.forEach(operator => {
                 largeDisplay(calculation);
             }
         }
-    if (tooLarge == true)
-    miniDisplay('......Number too large.......');
+    if (tooLarge == true) {
+        miniDisplay('......Number too long.......');
+    }
+    if (zeroDiv == true) {
+        miniDisplay('Divide by zero? Really???')
+    }
+    
     })
 })
 
@@ -104,6 +116,7 @@ clear.addEventListener('click', () => {
     aNum = '';
     calculation = 0;
     tooLarge = false;
+    zeroDiv = false;
 })
 
 function miniDisplay(arg) { //function to update top text
@@ -120,6 +133,10 @@ function largeDisplay(result) { //function to update top text
     if (tempText.length>14) {
         tempText = "Error";
         tooLarge = true;   
+    }
+    if (tempText == "Infinity" || tempText == "-Infinity") {
+        tempText = "User Failed";
+        zeroDiv = true;
     }
     bottomText.textContent=tempText; //update topText
 }
@@ -146,7 +163,7 @@ function operation(num1, num2, action) {
             result = power(num1, num2);  
             break;
     }
-    result = Math.round(result * Math.pow(10,12)) / Math.pow(10,12)
+    result = Math.round(result * Math.pow(10,6)) / Math.pow(10,6)
     if (result == 40353607.00000001) {result=40353607;} //for some unknown reason, this is what 7^9 returns
     return result;
 }
