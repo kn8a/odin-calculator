@@ -2,7 +2,6 @@ let mainArray = [];
 let sumArray = [];
 let pointer = 0;
 let aNum='';
-let calculation=0;
 
 const numbers = document.querySelectorAll('.number'); //number buttons array
 const clear = document.querySelector('.clear'); //clear button
@@ -54,34 +53,53 @@ equalbtn.addEventListener('click', () => {
 
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
-        if (aNum.length > 0) {
+        if (operator.getAttribute('data-opr')=='=' && aNum.length>0 && mainArray.length==2){
+            mainArray.push(aNum);
+            aNum='';
+            mainArray.push('=');
+            let calculation=operation(mainArray[0], mainArray[2], mainArray[1])
+            sumArray.push(calculation);
+            largeDisplay(calculation);
+            miniDisplay('');
+        } //WORKS!!!! RETURNS [NUM, OP, NUM, =]
+        
+                
+        if (operator.getAttribute('data-opr')=='=' && aNum.length>0 && sumArray!=0) {         
+            mainArray.push(aNum);
+            mainArray.push('=');
+            aNum='';
+            let calculation = operation(sumArray[sumArray.length-1], mainArray[mainArray.length-2], mainArray[mainArray.length-3]);
+            sumArray.push(calculation);
+            largeDisplay(calculation);
+            miniDisplay('');
+            //WORKS
+        }
+
+        if (aNum.length==0 && operator.getAttribute('data-opr')!='=') {
+            mainArray.push(sumArray[sumArray.length-1]);
+            mainArray.push(operator.getAttribute('data-opr'));
+            console.log(mainArray);
+            miniDisplay('');
+        }
+        
+        else if (aNum.length > 0 && operator.getAttribute('data-opr')!='=') {
             mainArray.push(aNum); //add previous number to array
-            pointer++; //increase array pointer 
             aNum=''; //reset number variable
             action = operator.getAttribute('data-opr'); //get operator type
             mainArray.push(action); //add operator to array
-            pointer++; //increase array pointer
             miniDisplay('');
-            
-            
 
-            //console.log(mainArray);
-            //console.log(pointer);
-            //console.log(mainArray[pointer-1]);
-            //console.log(mainArray[pointer-4], mainArray[pointer-3], mainArray[pointer-2]);
-            
-            if (pointer>3 && sumArray.length==0) {
-                calculation = operation(mainArray[pointer-4], mainArray[pointer-2], mainArray[pointer-3]);
+            if (mainArray.length>3 && sumArray.length==0 && mainArray[mainArray.length-3]!='=') {
+                let calculation = operation(mainArray[mainArray.length-4], mainArray[mainArray.length-2], mainArray[mainArray.length-3]);
                 sumArray.push(calculation);
                 largeDisplay(calculation);
             }
-            else if (sumArray!=0) {
-                calculation = operation(sumArray[sumArray.length-1], mainArray[pointer-2], mainArray[pointer-3]);
+            else if (sumArray!=0 && mainArray[mainArray.length-3]!='=') {
+                let calculation = operation(sumArray[sumArray.length-1], mainArray[mainArray.length-2], mainArray[mainArray.length-3]);
                 sumArray.push(calculation);
                 largeDisplay(calculation);
                 console.log('sumarray '+sumArray);
             }
-
         }
     })
 })
@@ -136,14 +154,10 @@ function operation(num1, num2, action) {
             break;
         case '^':
             result = power(num1, num2);   
-            break;   
+            break;
     }
     return result;
 }
-
-
-
-
 
 //math functions
 function add(num1,num2) {
