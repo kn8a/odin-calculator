@@ -11,10 +11,13 @@ let topText = document.querySelector('.topText'); //top text variable
 let bottomText = document.querySelector('.bottomText'); //bottom text variable
 const operators = document.querySelectorAll('.operator'); //operator buttons array
 const decPeriod = document.querySelector('.period');
+const sound = new Audio("button.mp3");
 
 
 numbers.forEach(number => {
     number.addEventListener('click', () => {
+        sound.play();
+        sound.currentTime=0;
         if (tooLarge==true || zeroDiv==true) {return false;}
         if (number.getAttribute('data-num') == 0 && aNum==0) { //to not repeat 0 when its already 0
             aNum="0";
@@ -27,16 +30,17 @@ numbers.forEach(number => {
 })
 
 decPeriod.addEventListener('click', () => {
-    console.log(aNum);
-    console.log(aNum.toString().indexOf('.'));
+    sound.play();
+    sound.currentTime=0;
     if (aNum.toString().indexOf('.') == -1) {
         aNum = aNum + '.';
     }
-    console.log(aNum);
 })
 
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
+        sound.play();
+        sound.currentTime=0;
         if (operator.getAttribute('data-opr')=='-' && aNum.length==0 && aNum.toString().indexOf('-') == -1) {
             console.log(aNum);
             aNum = '-' + aNum;
@@ -102,12 +106,16 @@ operators.forEach(operator => {
 
 //back button
 back.addEventListener('click', () => {
+    sound.play();
+    sound.currentTime=0;
     aNum = aNum.substring(0, aNum.length - 1); //remove the last digit
     miniDisplay(aNum); //update top display
 })
 
 //clear button
 clear.addEventListener('click', () => {
+    sound.play();
+    sound.currentTime=0;
     mainArray = [];
     sumArray = [];
     pointer = 0;
