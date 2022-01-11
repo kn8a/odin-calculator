@@ -12,6 +12,7 @@ let bottomText = document.querySelector('.bottomText'); //bottom text variable
 const operators = document.querySelectorAll('.operator'); //operator buttons array
 const decPeriod = document.querySelector('.period');
 const sound = new Audio("button.mp3");
+const errorSnd = new Audio("error.mp3");
 
 
 numbers.forEach(number => {
@@ -96,9 +97,13 @@ operators.forEach(operator => {
         }
     if (tooLarge == true) {
         miniDisplay('......Number too long.......');
+        errorSnd.play();
+        sound.currentTime=0;
     }
     if (zeroDiv == true) {
-        miniDisplay('Divide by zero? Really???')
+        miniDisplay('Divide by zero? Really???');
+        errorSnd.play();
+        sound.currentTime=0;
     }
     
     })
