@@ -88,9 +88,9 @@ button {
 }
 
 button:hover {
-    /*filter: brightness(115%) drop-shadow(1px 1px 4px rgb(255, 255, 255));*/
     filter: brightness(92%) drop-shadow(1px 1px 4px rgb(112, 87, 55));
 }
+
 button:active {
     box-shadow: inset 0px 0px 6px 0px black;
     filter: brightness(92%) drop-shadow(1px 1px 0px rgb(255, 255, 255));
@@ -118,7 +118,3 @@ button:active {
     background-color: rgb(255, 247, 224);
     
 }
-
-
-
-
