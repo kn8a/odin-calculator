@@ -1,7 +1,7 @@
 let mainArray = [];
 let sumArray = [];
-let pointer = 0;
 let aNum='';
+let tooLarge = false;
 
 const numbers = document.querySelectorAll('.number'); //number buttons array
 const clear = document.querySelector('.clear'); //clear button
@@ -9,23 +9,35 @@ const back = document.querySelector('.back'); //back button
 let topText = document.querySelector('.topText'); //top text variable
 let bottomText = document.querySelector('.bottomText'); //bottom text variable
 const operators = document.querySelectorAll('.operator'); //operator buttons array
+const decPeriod = document.querySelector('.period');
 
 
 numbers.forEach(number => {
     number.addEventListener('click', () => {
+        if (tooLarge==true) {return false;}
         if (number.getAttribute('data-num') == 0 && aNum==0) { //to not repeat 0 when its already 0
             aNum="0";
         }
         else {
             aNum=aNum + number.getAttribute('data-num') //add to current number string
         }
-        console.log(aNum);
         miniDisplay(aNum); //display on topText
     })
 })
 
+decPeriod.addEventListener('click', () => {
+    console.log(aNum);
+    console.log(aNum.toString().indexOf('.'));
+    if (aNum.toString().indexOf('.') == -1) {
+        aNum = aNum + '.';
+    }
+    console.log(aNum);
+})
+
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
+        if (aNum.length==0 && sumArray.length==0) {
+            return;} //in case operator clicked without a number and without a previous operation
         if (operator.getAttribute('data-opr')=='=' && aNum.length>0 && mainArray.length==2){
             mainArray.push(aNum);
             aNum='';
@@ -35,8 +47,7 @@ operators.forEach(operator => {
             largeDisplay(calculation);
             miniDisplay('');
         } //WORKS!!!! RETURNS [NUM, OP, NUM, =]
-        
-                
+            
         if (operator.getAttribute('data-opr')=='=' && aNum.length>0 && sumArray!=0) {         
             mainArray.push(aNum);
             mainArray.push('=');
@@ -51,7 +62,6 @@ operators.forEach(operator => {
         if (aNum.length==0 && operator.getAttribute('data-opr')!='=') {
             mainArray.push(sumArray[sumArray.length-1]);
             mainArray.push(operator.getAttribute('data-opr'));
-            console.log(mainArray);
             miniDisplay('');
         }
         
@@ -71,24 +81,17 @@ operators.forEach(operator => {
                 let calculation = operation(sumArray[sumArray.length-1], mainArray[mainArray.length-2], mainArray[mainArray.length-3]);
                 sumArray.push(calculation);
                 largeDisplay(calculation);
-                console.log('sumarray '+sumArray);
             }
         }
+    if (tooLarge == true)
+    miniDisplay('......Number too large.......');
     })
 })
-
-
 
 //back button
 back.addEventListener('click', () => {
     aNum = aNum.substring(0, aNum.length - 1); //remove the last digit
     miniDisplay(aNum); //update top display
-    //if (aNum.length == 0 && (mainArray[pointer-1] % 2 != 0)){
-    //    mainArray.splice(-1);
-    //    pointer=pointer-1;
-    //}
-    //miniDisplay(aNum+'');
-
 })
 
 //clear button
@@ -100,18 +103,32 @@ clear.addEventListener('click', () => {
     largeDisplay('0');
     aNum = '';
     calculation = 0;
+    tooLarge = false;
 })
 
 function miniDisplay(arg) { //function to update top text
-    topText.textContent=mainArray.join('') + arg; //update topText
+    let tempText=mainArray.join('') + arg +'';
+    if (tempText.length>27) {
+        tempText = "..." + tempText.substring(tempText.length-25, tempText.length-1);
+    }
+    topText.textContent=tempText; //update topText
 }
 
 function largeDisplay(result) { //function to update top text
-    bottomText.textContent=result; //update topText
+    let tempText = "" + result;
+    console.log(tempText);
+    if (tempText.length>14) {
+        tempText = "Error";
+        tooLarge = true;   
+    }
+    bottomText.textContent=tempText; //update topText
 }
 
 function operation(num1, num2, action) {
     let result=0;
+    if (num1 == undefined) { //if statement sent to calculate without first number
+        num1=0; //first number to be 0
+    }
     switch (action) {
         case '+':
             result = add(num1, num2);
@@ -120,15 +137,17 @@ function operation(num1, num2, action) {
             result = substract(num1, num2);
             break;
         case '*':
-            result = multiply(num1, num2);
+            result = multiply(num1, num2);            
             break;
         case '/':
-            result = divide(num1, num2);
+            result = divide(num1, num2);      
             break;
         case '^':
-            result = power(num1, num2);   
+            result = power(num1, num2);  
             break;
     }
+    result = Math.round(result * Math.pow(10,12)) / Math.pow(10,12)
+    if (result == 40353607.00000001) {result=40353607;} //for some unknown reason, this is what 7^9 returns
     return result;
 }
 
@@ -150,8 +169,8 @@ function divide(num1, num2) {
 };
 
 function power(num1, num2) {
-	let sum=num1; //initiate sum to first variable for case of 0 or 1 on num2
-  for (let j = 1; j < num2; j++) { //loop based on num2
+	let sum=Number(num1); //initiate sum to first variable for case of 0 or 1 on num2
+  for (let j = 1; j < Number(num2); j++) { //loop based on num2
     sum = sum * num1; //multiply num1
   }
   return sum;
