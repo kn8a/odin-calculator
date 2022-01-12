@@ -161,13 +161,17 @@ function miniDisplay(arg) { //function to update top text
 //large display
 function largeDisplay(result) { //function to update top text
     let tempText = "" + result; //conver result to string
-    if (tempText.length>14) { //if string longer than 14
+    if (tempText.length>11) { //if string longer than 14
         tempText = "Error"; //display error
         tooLarge = true; //error variable true
     }
     if (tempText == "Infinity" || tempText == "-Infinity") { //if divided by 0
         tempText = "User Failed"; //display error
         zeroDiv = true; //error variable true
+    }
+    if (zeroDiv == false && tooLarge == false){
+        const numberFormatter = Intl.NumberFormat('en-US');
+        tempText = numberFormatter.format(tempText);
     }
     bottomText.textContent=tempText; //update topText
     return;
