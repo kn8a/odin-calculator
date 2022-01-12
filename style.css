@@ -1,3 +1,8 @@
+   @font-face{
+    font-family:'buttons';
+    src: url('font/dosis/Dosis-SemiBold.ttf');
+   }
+
 body{
     display: flex;
     flex-direction: column;
@@ -61,13 +66,15 @@ body{
     margin-bottom: 1vh;
     box-shadow: inset 0px 0px 15px 0px black;
     user-select: none;
+    
 }
 
 .bottomText {
     font-size:xx-large;
-    font-weight: 700;
+    font-weight: 1000;
     text-shadow: 0px 0px 10px rgb(0, 224, 224);
     animation: flicker 1.5s infinite alternate;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .topText {
@@ -75,6 +82,8 @@ body{
     font-weight: 600;
     text-shadow: 0px 0px 10px rgb(0, 226, 226);
     animation: flicker 1.5s infinite alternate;
+    font-family: 'Courier New', Courier, monospace;
+    
 }
 
 /* buttons styles */
@@ -86,11 +95,11 @@ button {
     border: 0px lightslategray;
     border-style: solid;
     font-weight: 900;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: larger;
+    font-size: x-large;
     filter:drop-shadow(1px 1px 4px rgb(112, 87, 55));
     transition: 0.1s;   
     user-select: none;
+    font-family:'buttons';
 }
 
 button:hover {
