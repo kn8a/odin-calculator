@@ -46,6 +46,12 @@ operators.forEach(operator => {
         //sound
         sound.play(); //click sound
         sound.currentTime=0; //reset sound time
+
+        //Negative input
+        if (operator.getAttribute('data-opr')=='-' && aNum.length==0 && aNum.toString().indexOf('-') == -1) {
+            aNum = '-' + aNum; //add minus sign to num if minus doesnt already exist
+                return;
+            }
                 
         if (aNum.length==0 && sumArray.length==0) {
             return; //in case operator clicked without a number and without a previous operation
@@ -58,13 +64,7 @@ operators.forEach(operator => {
             miniDisplay(''); //update mini display
             return;
         }
-        
-        //Negative input
-        if (operator.getAttribute('data-opr')=='-' && aNum.length==0 && aNum.toString().indexOf('-') == -1) {
-            aNum = '-' + aNum; //add minus sign to num if minus doesnt already exist
-            return;
-        }
-        
+            
         //Equal button - for first operation
         if (operator.getAttribute('data-opr')=='=' && aNum.length>0 && mainArray.length==2){
             mainArray.push(aNum); //add num to array
@@ -130,6 +130,7 @@ back.addEventListener('click', () => {
     sound.currentTime=0; //reset sound time
     aNum = aNum.substring(0, aNum.length - 1); //remove the last digit
     miniDisplay(aNum); //update top display
+    return;
 })
 
 //CLEAR BUTTON
@@ -144,6 +145,7 @@ clear.addEventListener('click', () => {
     calculation = 0; //reset calculation
     tooLarge = false; //reset text too large to fit var
     zeroDiv = false; //reset divide by zero var
+    return;
 })
 
 //DISPLAY FUNCTIONS
@@ -154,6 +156,7 @@ function miniDisplay(arg) { //function to update top text
         tempText = "..." + tempText.substring(tempText.length-25, tempText.length-1); //fill display with last parts of string
     }
     topText.textContent=tempText; //update topText
+    return;
 }
 //large display
 function largeDisplay(result) { //function to update top text
@@ -167,6 +170,7 @@ function largeDisplay(result) { //function to update top text
         zeroDiv = true; //error variable true
     }
     bottomText.textContent=tempText; //update topText
+    return;
 }
 
 //MATH FUNCTIONS
@@ -218,3 +222,99 @@ function power(num1, num2) {
   }
   return sum;
 };
+
+//KEYBOARD
+window.onkeydown = function(keyPress) {
+    let inputKey=(keyPress.key);
+    let press;
+    switch (inputKey) {
+        case '0':
+            press=document.querySelector('#n0');
+            press.click();
+            return;
+        case '1':
+            press=document.querySelector('#n1');
+            press.click();
+            return;
+        case '2':
+            press=document.querySelector('#n2');
+            press.click();
+            return;
+        case '3':
+            press=document.querySelector('#n3');
+            press.click();
+            return;
+        case '4':
+            press=document.querySelector('#n4');
+            press.click();
+            return;
+        case '5':
+            press=document.querySelector('#n5');
+            press.click();
+            return;           
+        case '6':
+            press=document.querySelector('#n6');
+            press.click();
+            return;
+        case '7':
+            press=document.querySelector('#n7');
+            press.click();
+            return;
+        case '8':
+            press=document.querySelector('#n8');
+            press.click();
+            return;
+        case '9':
+            press=document.querySelector('#n9');
+            press.click();
+            return;
+        case '.':
+            press=document.querySelector('#dot');
+            press.click();
+            return;
+        //case '=':
+            //press=document.querySelector('#equal');
+            //press.click();
+            //return;
+        case 'Enter':
+            press=document.querySelector('#equal');
+            press.click();
+            return;
+        case '+':
+            press=document.querySelector('#plus');
+            press.click();
+            return;
+        case '-':
+            press=document.querySelector('#minus');
+            press.click();
+            return;
+        case '*':
+            press=document.querySelector('#times');
+            press.click();
+            return;
+        case '/':
+            press=document.querySelector('#divide');
+            press.click();
+            return;
+        case '^':
+            press=document.querySelector('#power');
+            press.click();
+            return;
+        case '/':
+            press=document.querySelector('#divide');
+            press.click();
+            return;
+        case 'Delete':
+            press=document.querySelector('#del');
+            press.click();
+            return;
+        case 'Backspace':
+            press=document.querySelector('#del');
+            press.click();
+            return;
+        case 'Escape':
+            press=document.querySelector('#ac');
+            press.click();
+            return;
+    }
+}

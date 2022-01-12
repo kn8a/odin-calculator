@@ -44,4 +44,4 @@ Your calculator should not evaluate more than a single pair of numbers at a time
 
 ✔️EXTRA CREDIT: Add a “backspace” button, so the user can undo if they click the wrong number.
 
-EXTRA CREDIT: Add keyboard support!
+✔️EXTRA CREDIT: Add keyboard support!

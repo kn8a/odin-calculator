@@ -21,6 +21,7 @@ body{
     font-weight: 700;
     padding-top: 0.5vh;
     font-size: larger;
+    user-select: none;
 }
 
 .container {
