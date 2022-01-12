@@ -145,6 +145,7 @@ clear.addEventListener('click', () => {
     calculation = 0; //reset calculation
     tooLarge = false; //reset text too large to fit var
     zeroDiv = false; //reset divide by zero var
+    window.location.reload();
     return;
 })
 
