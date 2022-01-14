@@ -2,8 +2,8 @@
 let mainArray = []; //used for display and for calculations
 let sumArray = []; //stores totals of calculations
 let aNum=''; //to store currently entered number
-let tooLarge = false; //boolean for error checking
-let zeroDiv = false; //boolean for erro checking
+let tooLarge = false; //boolean for number too large to display error
+let zeroDiv = false; //boolean for division by zero error
 //DOM elements
 const numbers = document.querySelectorAll('.number'); //number buttons array
 const clear = document.querySelector('.clear'); //clear button
