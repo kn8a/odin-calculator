@@ -36,13 +36,13 @@ Live demo: [https://kn8a.github.io/odin-calculator/](https://kn8a.github.io/odin
    they click the wrong number.
  - ✔️⭐ (EXTRA CREDIT) Add keyboard support!
 
-### Extras that I added
+### ⭐ Extras that I added
 |Functionality|Look and feel|
 |--|--|
-|⭐ Operators perform "=" operation when possible.|⭐ Hover & MouseDown effects|
-|⭐ Ability to enter negative numbers.|⭐ Click sounds & error sounds.|
-|⭐ Power ("^") Operator|⭐ Custom font.|
-|⭐ Extra "display" to display previous operations|⭐ Display "neon flickering" effect.|
+|Operators perform "=" operation when possible.|Hover & MouseDown effects|
+|Ability to enter negative numbers.|Click sounds & error sounds.|
+|Power ("^") Operator|Custom font.|
+|Extra "display" to display previous operations|Display "neon flickering" effect.|
  
 ### Where I struggled
 
