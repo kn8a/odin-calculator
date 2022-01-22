@@ -1,5 +1,5 @@
 # Calculator
-![Calculator Screenshot](https://user-images.githubusercontent.com/88045655/150538299-156cf553-eac5-49e3-8b51-8d603f40fc4d.jpg)
+![Calculator Screenshot](https://user-images.githubusercontent.com/88045655/150615114-affadece-ecb5-401b-866d-d95d10a6daaf.jpg)
 ### Background
 This project is written in HTML, CSS, JS to answer the [Calculator problem](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/calculator) in [The Odin Project](https://www.theodinproject.com/).
 My goal was to make a calculator that fully functional and interactive, as well as, to look cool while keeping the UI clean.
